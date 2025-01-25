@@ -7,7 +7,7 @@ By the end of this guide, you'll:
 - Develop role-specific terminal productivity skills
 - Enhance personal and professional computing efficiency
 
-## 🌈 Command Guide Sections
+## 🗨️ Command Guide Sections
 1. [Everyday Users](#everyday-users-commands)
 2. [Designers](#designers-commands)
 3. [Developers](#developers-commands)
