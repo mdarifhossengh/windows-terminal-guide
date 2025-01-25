@@ -1,135 +1,145 @@
 # Troubleshooting Windows Terminal 🔧
 
-Common issues and their solutions to help you resolve Windows Terminal problems.
+## 🎯 Learning Objectives
+By the end of this guide, you'll:
+- Diagnose common Windows Terminal issues
+- Resolve performance and configuration problems
+- Understand error recovery strategies
+- Learn advanced troubleshooting techniques
 
-## Common Issues
+## 🚨 Diagnostic Workflow
 
-### Terminal Won't Launch
+### 1. Initial Diagnostic Checklist
+- ✅ Windows version 10 (1903+) or 11
+- ✅ Latest Microsoft Store updates
+- ✅ Graphics drivers up-to-date
+- ✅ Sufficient system resources
 
-1. **Missing Dependencies**
-   - Ensure Windows 10 version 1903 or later
-   - Check Microsoft Store for updates
-   - Reinstall Windows Terminal
+## 🔍 Common Issue Categories
 
-2. **Corrupted Settings**
-   ```powershell
-   # Backup settings
-   Copy-Item "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" "$env:USERPROFILE\Desktop\terminal_backup.json"
-   
-   # Delete settings to reset
-   Remove-Item "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-   ```
+### 🚫 Terminal Launch Failures
+#### Symptoms
+- Terminal won't open
+- Crashes immediately
+- Blank screen
 
-### Performance Issues
+#### Troubleshooting Steps
+```powershell
+# Backup settings
+$backupPath = "$env:USERPROFILE\Desktop\terminal_backup"
+New-Item -ItemType Directory -Force -Path $backupPath
+Copy-Item "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\*" $backupPath
 
-1. **Slow Startup**
-   - Disable startup scripts in profile
-   - Check antivirus exclusions
-   - Reduce acrylic transparency
+# Reset settings
+Remove-Item "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+```
 
-2. **High CPU Usage**
-   - Disable GPU acceleration
-   - Update graphics drivers
-   - Reduce number of active panes
+### 🐌 Performance Optimization
 
-### Visual Glitches
+#### Slow Startup Fixes
+1. Disable startup scripts
+2. Check antivirus exclusions
+3. Reduce acrylic transparency
+4. Update graphics drivers
 
-1. **Font Issues**
-   - Verify font installation
-   - Try default Cascadia Code
-   - Clear font cache:
-   ```cmd
-   fc-cache -f -v
-   ```
+#### High Resource Usage
+```powershell
+# Disable GPU acceleration
+# Edit settings.json and set:
+{
+    "experimental.rendering.mode": "software"
+}
 
-2. **Display Problems**
-   - Update Windows
-   - Update graphics drivers
-   - Disable acrylic effects
+# Limit active panes
+# Reduce simultaneous terminal sessions
+```
 
-### WSL Problems
+### 🖥️ Visual Glitches Resolution
 
-1. **WSL Not Working**
-   ```powershell
-   # Check WSL status
-   wsl --status
-   
-   # Update WSL
-   wsl --update
-   
-   # Restart WSL
-   wsl --shutdown
-   ```
+#### Font Troubleshooting
+```bash
+# Clear font cache
+fc-cache -f -v
 
-2. **Path Issues**
-   - Check path conversion
-   - Verify WSL installation
-   - Update WSL version
+# Verify font installation
+# Recommended: Cascadia Code
+```
 
-## Error Messages
+### 🐧 WSL Integration Fixes
 
-### Common Error Codes
+#### WSL Diagnostic Commands
+```powershell
+# Check WSL status
+wsl --status
 
-1. **0x80070002**
-   - File not found
-   - Check file paths
-   - Verify permissions
+# Update WSL
+wsl --update
 
-2. **0x80004005**
-   - Access denied
-   - Run as administrator
-   - Check folder permissions
+# Restart WSL
+wsl --shutdown
+```
 
-### Profile Errors
+## 🛠️ Advanced Troubleshooting
 
-1. **Invalid Profile Settings**
-   - Validate JSON syntax
-   - Check GUID format
-   - Verify file paths
+### Error Code Decoder
+- **0x80070002**: File not found
+  - Check file paths
+  - Verify permissions
 
-2. **Missing Profile**
-   ```json
-   {
-	   "profiles": {
-		   "defaults": {},
-		   "list": [
-			   {
-				   "guid": "{...}",
-				   "name": "PowerShell",
-				   "commandline": "powershell.exe"
-			   }
-		   ]
-	   }
-   }
-   ```
+- **0x80004005**: Access denied
+  - Run as administrator
+  - Check folder permissions
 
-## Performance Tips
+### Profile Configuration Validation
+```json
+{
+    "profiles": {
+        "defaults": {},
+        "list": [
+            {
+                "guid": "{unique-identifier}",
+                "name": "Validated Profile",
+                "commandline": "powershell.exe"
+            }
+        ]
+    }
+}
+```
 
-1. **Optimize Settings**
-   - Disable unused features
-   - Reduce history size
-   - Limit startup tasks
+## 🎓 Troubleshooting Exercises
 
-2. **Memory Management**
-   - Close unused tabs
-   - Limit concurrent processes
-   - Monitor resource usage
+### Exercise 1: Performance Diagnosis
+1. Open Task Manager
+2. Monitor Terminal's resource usage
+3. Identify performance bottlenecks
+4. Apply recommended optimizations
 
-## Recovery Steps
+### Exercise 2: WSL Connectivity
+1. Verify WSL installation
+2. Test WSL connectivity
+3. Resolve path translation issues
+4. Update to latest WSL version
 
-1. **Backup Important Data**
-   ```powershell
-   # Backup all settings
-   $backupPath = "$env:USERPROFILE\Desktop\terminal_backup"
-   New-Item -ItemType Directory -Force -Path $backupPath
-   Copy-Item "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\*" $backupPath
-   ```
+## 💡 Pro Troubleshooting Tips
+- Always backup before major changes
+- Use incremental debugging
+- Check official documentation
+- Join community forums
+- Keep software updated
 
-2. **Clean Installation**
-   - Uninstall Windows Terminal
-   - Remove settings folder
-   - Reinstall from Store
+## 🚀 Recovery Strategies
+1. Backup critical configurations
+2. Perform clean installation
+3. Restore from backup
+4. Reconfigure gradually
 
-## Next Steps
-- Review [FAQ](faq.md) for more solutions
-- Check [Customization](customization.md) for optimal settings
+## 📚 Next Learning Paths
+- [Advanced Features](advanced-features.md)
+- [Customization Guide](customization.md)
+
+## 🌐 Community Support
+- Microsoft Support
+- Windows Terminal GitHub
+- Stack Overflow
+- Reddit r/Windows Terminal
+```
