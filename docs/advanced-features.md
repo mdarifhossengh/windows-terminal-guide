@@ -1,176 +1,157 @@
-# Advanced Windows Terminal Features 🚀
+# Advanced Windows Terminal: Role-Specific Command Mastery 🚀
 
 ## 🎯 Learning Objectives
 By the end of this guide, you'll:
-- Master multi-tab and multi-pane workflows
-- Integrate Windows Subsystem for Linux (WSL)
-- Customize PowerShell profiles
-- Configure advanced terminal settings
-- Understand SSH and remote connections
+- Master terminal commands for specific professional roles
+- Understand advanced workflow optimization
+- Develop role-specific terminal productivity skills
+- Enhance personal and professional computing efficiency
 
-## 🖥️ Tabs and Panes Mastery
+## 🌈 Command Guide Sections
+1. [Everyday Users](#everyday-users-commands)
+2. [Designers](#designers-commands)
+3. [Developers](#developers-commands)
+4. [Programmers](#programmers-commands)
+5. [Engineers](#engineers-commands)
+6. [Security Professionals](#security-professionals-commands)
 
-### 📂 Tab Management
+## 🖥️ Everyday Users Commands
+
+### 📂 File and Folder Management
 ```bash
-# Keyboard Shortcuts
-Ctrl + Shift + T   # New tab
-Ctrl + Shift + D   # Duplicate tab
-Ctrl + Tab         # Switch tabs
-Ctrl + Alt + Num   # Switch to specific tab
+# Quick Navigation
+cd Documents           # Change to Documents folder
+mkdir NewFolder        # Create new folder
+cp file.txt backup/    # Copy files
+mv oldname.txt newname.txt  # Rename files
+
+# Search and Find
+dir /s "filename"      # Search files recursively
+findstr "text" file.txt  # Search text in files
 ```
 
-### 🔲 Pane Layouts
-```
-┌─────────┬─────────┐
-│         │         │
-│  Pane1  │  Pane2  │
-│         │         │
-├─────────┴─────────┤
-│      Pane3        │
-└─────────────────┘
-```
-
-#### Pane Navigation
+### 🔍 System Information
 ```bash
-Alt + Shift + -    # Split horizontally
-Alt + Shift + +    # Split vertically
-Alt + Arrow        # Navigate between panes
-Ctrl + Shift + W   # Close pane
+# System Details
+systeminfo             # Comprehensive system info
+ver                    # Windows version
+wmic computersystem get model  # Computer model
 ```
 
-## 🐧 WSL Integration Masterclass
+## 🎨 Designers Commands
 
-### 🚀 WSL Setup Challenge
-1. Enable WSL:
+### 🖼️ Image and Media Management
+```bash
+# Batch Image Processing
+magick convert input.jpg -resize 50% output.jpg
+ffmpeg -i video.mp4 -vf scale=1280:720 scaled_video.mp4
+
+# Color Palette Extraction
+# Requires ImageMagick
+magick input.jpg -colors 8 palette.png
+```
+
+### 📊 File Organization
+```bash
+# Organize Design Files
+for /d %i in (*.psd) do mkdir "%~ni_archive"
+move "%i" "%~ni_archive\"
+```
+
+## 💻 Developers Commands
+
+### 🐍 Python Development
+```bash
+# Virtual Environment Management
+python -m venv myenv   # Create virtual environment
+myenv\Scripts\activate # Activate environment
+pip list               # List installed packages
+```
+
+### 🔧 Project Management
+```bash
+# Git Workflow
+git clone [repository]
+git checkout -b feature/new-branch
+git push origin feature/new-branch
+```
+
+## 👩‍💻 Programmers Commands
+
+### 🧩 Code Compilation
+```bash
+# Compile Across Languages
+gcc program.c -o program   # C Compilation
+javac Program.java         # Java Compilation
+go build program.go        # Go Compilation
+```
+
+### 🔬 Debugging
+```bash
+# Process Monitoring
+tasklist                   # List running processes
+netstat -ano               # Network connections
+```
+
+## 🚀 Engineers Commands
+
+### 🛠️ System Optimization
+```bash
+# Performance Monitoring
+wmic cpu get loadpercentage  # CPU Usage
+wmic logicaldisk get size,freespace  # Disk Space
+```
+
+### 🌐 Network Management
+```bash
+# Network Diagnostics
+ipconfig /all            # Detailed network info
+ping google.com          # Connection test
+tracert google.com       # Route tracing
+```
+
+## 🔒 Security Professionals Commands
+
+### 🕵️ Security Scanning
+```bash
+# Network Security
+netstat -ano | findstr LISTENING  # Open ports
+powershell "Get-NetFirewallRule"  # Firewall rules
+
+# File Integrity
+certutil -hashfile file.txt SHA256  # File hash
+```
+
+### 🛡️ System Hardening
+```bash
+# User and Permission Management
+net user                 # List users
+icacls folder /grant username:F  # Grant full permissions
+```
+
+## 🎓 Cross-Role Advanced Techniques
+
+### 🔧 Terminal Customization
 ```powershell
-# Run in elevated PowerShell
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-```
-
-2. Install Linux Distribution
-   - Open Microsoft Store
-   - Search and install Ubuntu or your preferred distribution
-
-3. Configure WSL Profile
-```json
-{
-    "profiles": {
-        "list": [
-            {
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            }
-        ]
-    }
-}
-```
-
-### 🌟 WSL Pro Features
-- Seamless path translation
-- Integrated file system
-- Clipboard synchronization
-- GPU acceleration (WSL 2)
-
-## 🔧 PowerShell Power User Techniques
-
-### 📝 Profile Customization
-```powershell
-# Create/Edit PowerShell Profile
-Test-Path $PROFILE      # Check if exists
-New-Item -Path $PROFILE -Type File -Force
-notepad $PROFILE        # Open for editing
-```
-
-### 🚀 Custom Functions
-```powershell
-# Quick Navigation Function
+# PowerShell Profile Customization
 function goto($location) {
     Switch ($location) {
         "projects" { Set-Location "D:\Projects" }
         "docs" { Set-Location "C:\Users\$env:USERNAME\Documents" }
-        default { Write-Output "Location not found" }
-    }
-}
-
-# Git Shortcuts
-function gs { git status }
-function gp { git pull }
-function gps { git push }
-```
-
-## 🌐 SSH and Remote Connections
-
-### 🔐 SSH Key Generation
-```bash
-# Generate SSH Key
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-### 🖥️ Terminal SSH Profile
-```json
-{
-    "profiles": {
-        "list": [
-            {
-                "name": "Remote Server",
-                "commandline": "ssh user@server",
-                "icon": "🌐"
-            }
-        ]
     }
 }
 ```
 
-## 🎛️ Command Palette Magic
-- Access with `Ctrl + Shift + P`
-- Switch color schemes
-- Adjust font size
-- Toggle full screen
-- Find text
-- Open settings
 
-## 🚀 Advanced Launch Options
-
-### 💻 Command Line Arguments
-```bash
-# Launch specific profile
-wt -p "Ubuntu"
-
-# Multiple tabs
-wt -p "PowerShell" ; new-tab -p "Ubuntu"
-```
-
-### 🎮 Quake Mode
-- Toggle: `Win + ~`
-- Configure in settings:
-```json
-{
-    "globalSummonHotkeys": "win+~",
-    "useQuakeMode": true
-}
-```
-
-## 🎓 Learning Exercises
-
-### Exercise 1: WSL Exploration
-1. Install Ubuntu via Microsoft Store
-2. Open Windows Terminal
-3. Create a new WSL tab
-4. Run `pwd` and explore the filesystem
-5. Try running Linux commands like `ls`, `cat`, `grep`
-
-### Exercise 2: PowerShell Customization
-1. Create a new function in your PowerShell profile
-2. Add a custom alias
-3. Reload profile and test your changes
-
-## 📚 Next Learning Paths
-- [Troubleshooting Guide](troubleshooting.md)
-- [Frequently Asked Questions](faq.md)
 
 ## 💡 Pro Tips
 - Experiment safely
-- Read documentation
-- Join terminal communities
+- Use `--help` for command details
 - Practice consistently
+- Join professional communities
+
+## 📚 Continuous Learning
+- [Troubleshooting Guide](troubleshooting.md)
+- [Customization Techniques](customization.md)
+- Online tutorials and forums
 ```
